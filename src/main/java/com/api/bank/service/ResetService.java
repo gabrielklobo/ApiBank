@@ -3,15 +3,15 @@ package com.api.bank.service;
 import org.springframework.stereotype.Service;
 
 import com.api.bank.repository.AccountRepository;
-import com.api.bank.repository.OperationRepository;
+import com.api.bank.repository.EventRepository;
 
 @Service
 public class ResetService {
 
 	private final AccountRepository accountRepository;
-	private final OperationRepository operationRepository;
+	private final EventRepository operationRepository;
 	
-	public ResetService(AccountRepository accountRepository, OperationRepository operationRepository) {
+	public ResetService(AccountRepository accountRepository, EventRepository operationRepository) {
 		this.accountRepository = accountRepository;
 		this.operationRepository = operationRepository;
 	}
