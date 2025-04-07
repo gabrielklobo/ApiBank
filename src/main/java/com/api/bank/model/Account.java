@@ -1,8 +1,6 @@
 package com.api.bank.model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
@@ -11,8 +9,19 @@ import jakarta.persistence.Table;
 public class Account {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
+
+	private int balance;
+
+	public Account() {
+
+	}
+
+	public Account(long id, int balance) {
+		super();
+		this.id = id;
+		this.balance = balance;
+	}
 
 	public long getId() {
 		return id;
@@ -22,5 +31,11 @@ public class Account {
 		this.id = id;
 	}
 
+	public int getBalance() {
+		return balance;
+	}
 
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
 }
