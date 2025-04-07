@@ -40,6 +40,7 @@ public class EventService {
 		event.setOrigin(eventResponse.origin() != null ? eventResponse.origin().convertAsAccount() : null);
 		event.setDestination(eventResponse.destination() != null ? eventResponse.destination().convertAsAccount() : null);
 		event.setAmount(eventRequest.amount());
+		event.setType(eventRequest.type());
 
 		eventRepository.save(event);
 
@@ -63,8 +64,7 @@ public class EventService {
 			return new EventResponse(accResponse, null);
 		} else {
 			AccountResponse accResponseWithdraw = accountService.withdraw(eventRequest.origin(), eventRequest.amount());
-			AccountResponse accResponseDeposit = accountService.deposit(eventRequest.destination(),
-					eventRequest.amount());
+			AccountResponse accResponseDeposit = accountService.deposit(eventRequest.destination(), eventRequest.amount());
 			return new EventResponse(accResponseWithdraw, accResponseDeposit);
 		}
 	}
