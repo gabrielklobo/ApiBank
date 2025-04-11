@@ -1,13 +1,16 @@
 package com.api.bank.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
 import com.api.bank.dto.AccountResponse;
+import com.api.bank.dto.EventDTO;
 import com.api.bank.dto.EventRequest;
 import com.api.bank.dto.EventResponse;
+import com.api.bank.model.Account;
 import com.api.bank.model.Event;
 import com.api.bank.repository.EventRepository;
 
@@ -67,5 +70,35 @@ public class EventService {
 			AccountResponse accResponseDeposit = accountService.deposit(eventRequest.destination(), eventRequest.amount());
 			return new EventResponse(accResponseWithdraw, accResponseDeposit);
 		}
+	}
+	
+	public Integer getCountByDestinationId(Integer destinationId) {
+		return eventRepository.getCountByDestinationId(destinationId);
+	}
+	
+	public Integer getCountByOriginIdNativeQuery(Integer originId) {
+		return eventRepository.getCountByOriginIdNativeQuery(originId);
+	}
+	
+	public Integer countByDestination(Account account) {
+		return eventRepository.countByDestination(account);
+	}
+	
+	public List<EventDTO> getEventsByType(String type) {
+		return eventRepository.getEventsByType(type);
+	}
+	
+	public List<EventDTO> getEventsMappedByType(String type){
+		List<Object[]> results = eventRepository.getEventsMappedByType(type);
+		List<EventDTO> resultsDTO = new ArrayList<>();
+		
+		for(Object[] row : results) {
+			Long id = (Long) row[0];
+			double amount = (double) row[1];
+			
+			resultsDTO.add(new EventDTO(id, amount));
+		}
+		
+		return resultsDTO;
 	}
 }

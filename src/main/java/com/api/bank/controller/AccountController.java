@@ -19,9 +19,9 @@ public class AccountController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Integer> getBalance(@RequestParam("account_id") Long id) {
+	public ResponseEntity<Double> getBalance(@RequestParam("account_id") Long id) {
 		return accountService.findById(id)
 				.map(acc -> ResponseEntity.ok().body(acc.getBalance()) )	
-				.orElseGet(() -> ResponseEntity.status(404).body(0));
+				.orElseGet(() -> ResponseEntity.status(404).body(0.0));
 	}
 }

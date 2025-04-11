@@ -9,33 +9,31 @@ import jakarta.persistence.Table;
 public class Account {
 
 	@Id
-	private long id;
+	private Long id;
 
-	private int balance;
+	private Double balance;
 
 	public Account() {
-
 	}
 
-	public Account(long id, int balance) {
-		super();
+	public Account(Long id, Double balance) {
 		this.id = id;
 		this.balance = balance;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public int getBalance() {
+	public Double getBalance() {
 		return balance;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(Double balance) {
 		this.balance = balance;
 	}
 }

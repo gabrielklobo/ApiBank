@@ -8,12 +8,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "operation")
+@Table(name = "Event")
 public class Event {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 
 	// "deposit|withdraw|transfer"
 	private String type;
@@ -24,13 +24,24 @@ public class Event {
 	@ManyToOne
 	private Account destination;
 
-	private double amount;
+	private Double amount;
 
-	public long getId() {
+	public Event() {
+
+	}
+	
+	public Event(String type, Account origin, Account destination, Double amount) {
+		this.type = type;
+		this.origin = origin;
+		this.destination = destination;
+		this.amount = amount;
+	}
+
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -58,11 +69,11 @@ public class Event {
 		this.destination = destination;
 	}
 
-	public double getAmount() {
+	public Double getAmount() {
 		return amount;
 	}
 
-	public void setAmount(double amount) {
+	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 }

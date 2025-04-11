@@ -37,8 +37,8 @@ public class AccountService {
 		accountRepository.deleteById(id);
 	}
 
-	public AccountResponse deposit(int accountId, int amount) {
-		Account acc = findById((long) accountId).orElseGet(() -> new Account(accountId, 0));
+	public AccountResponse deposit(int accountId, double amount) {
+		Account acc = findById((long) accountId).orElseGet(() -> new Account((long) accountId, 0.0));
 
 		acc.setBalance(acc.getBalance() + amount);
 
@@ -47,7 +47,7 @@ public class AccountService {
 		return new AccountResponse(acc.getId(), acc.getBalance());
 	}
 	
-	public AccountResponse withdraw(int accountId, int amount) {
+	public AccountResponse withdraw(int accountId, double amount) {
 		Account acc = findById((long) accountId).orElseThrow();
 		
 		//Como não foi especificado se pode ou não ser negativo, estou deixando sem validação
